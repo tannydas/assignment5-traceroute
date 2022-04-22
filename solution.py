@@ -49,7 +49,7 @@ def build_packet():
 
     # Make a dummy header with a 0 checksum
     # struct -- Interpret strings as packed binary data
-    header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, ID, 1)
+    header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, myID, 1)
     data = struct.pack("d", time.time())
     # Append checksum to the header.
     # Calculate the checksum on the data and the dummy header.
@@ -62,7 +62,7 @@ def build_packet():
     else:
         myChecksum = htons(myChecksum)
 
-    header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, ID, 1)
+    header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, myID, 1)
     #Fill in end
 
     # So the function ending should look like this
@@ -116,7 +116,7 @@ def get_route(hostname):
                 #Fill in start
                 #Fetch the icmp type from the IP packet
                 icmpHeader = recvPacket[20:28]
-                requestType, code, theChecksum, packetID, sequence = struct.unpack("bbHHh", icmpHeader)
+                types, code, theChecksum, packetID, sequence = struct.unpack("bbHHh", icmpHeader)
                 #Fill in end
                 try: #try to fetch the hostname
                     #Fill in start
