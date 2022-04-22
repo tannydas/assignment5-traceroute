@@ -35,6 +35,7 @@ def checksum(string):
     answer = ~csum
     answer = answer & 0xffff
     answer = answer >> 8 | (answer << 8 & 0xff00)
+    #print(answer)
     return answer
 
 def build_packet():
@@ -168,6 +169,9 @@ def get_route(hostname):
                 break
             finally:
                 mySocket.close()
+        print(tracelist1)
+        print(tracelist2)
+    return tracelist2
 
 if __name__ == '__main__':
     get_route("google.co.il")
